@@ -12,6 +12,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+from init_db import init_db  # Certifique-se de que init_db.py está no mesmo diretório
+
+@app.route('/init')
+def initialize_database():
+    init_db()
+    return "Banco PostgreSQL inicializado com sucesso!"
+
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'biblioteca_secret_key')
 
 # Função para conectar ao banco PostgreSQL
